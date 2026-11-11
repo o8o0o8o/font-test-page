@@ -1,0 +1,6 @@
+/* Helvetica Neue LT Pro (Monotype desktop licence, MyFonts). local() uses the font installed on this computer. */
+@font-face{font-family:"Helvetica Neue LT Pro";font-style:normal;font-weight:400;font-display:swap;src:local("HelveticaNeueLTPro-Roman"), url("fonts/HelveticaNeueLTPro-Roman.otf") format("opentype")}
+@font-face{font-family:"Helvetica Neue LT Pro";font-style:normal;font-weight:500;font-display:swap;src:local("HelveticaNeueLTPro-Md"), url("fonts/HelveticaNeueLTPro-Md.otf") format("opentype")}
+@font-face{font-family:"Helvetica Neue LT Pro";font-style:normal;font-weight:700;font-display:swap;src:local("HelveticaNeueLTPro-Bd"), url("fonts/HelveticaNeueLTPro-Bd.otf") format("opentype")}
+@font-face{font-family:"Helvetica Neue LT Pro";font-style:normal;font-weight:800;font-display:swap;src:local("HelveticaNeueLTPro-Hv"), url("fonts/HelveticaNeueLTPro-Hv.otf") format("opentype")}
+@font-face{font-family:"Helvetica Neue LT Pro";font-style:normal;font-weight:900;font-display:swap;src:local("HelveticaNeueLTPro-Blk"), url("fonts/HelveticaNeueLTPro-Blk.otf") format("opentype")}

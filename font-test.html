@@ -1,0 +1,138 @@
+<title>Mammoet Heavy Check</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one column of specimen bands (white, black, red) under a status panel that names what actually rendered. Single brand look, set explicitly. */
+:root {
+  --white: #ffffff; --black: #000000; --red: #ff0000; --off: #f0efee; --grey: #595959; --ok: #0a7a2f; --warn: #b3140a;
+  --stack: "MM LT Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+/* Licensed Helvetica Neue LT Pro: local install first, then fonts/ next to this file (project folder only; files are not published). */
+@font-face { font-family: "MM LT Pro"; font-weight: 400; src: local("HelveticaNeueLTPro-Roman"), url("fonts/HelveticaNeueLTPro-Roman.otf") format("opentype"); }
+@font-face { font-family: "MM LT Pro"; font-weight: 500; src: local("HelveticaNeueLTPro-Md"), url("fonts/HelveticaNeueLTPro-Md.otf") format("opentype"); }
+@font-face { font-family: "MM LT Pro"; font-weight: 700; src: local("HelveticaNeueLTPro-Bd"), url("fonts/HelveticaNeueLTPro-Bd.otf") format("opentype"); }
+@font-face { font-family: "MM LT Pro"; font-weight: 800; src: local("HelveticaNeueLTPro-Hv"), url("fonts/HelveticaNeueLTPro-Hv.otf") format("opentype"); }
+@font-face { font-family: "MM LT Pro"; font-weight: 900; src: local("HelveticaNeueLTPro-Blk"), url("fonts/HelveticaNeueLTPro-Blk.otf") format("opentype"); }
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--white); color: var(--black); font: 500 15px/1.4 var(--stack); -webkit-font-smoothing: auto; }
+.band { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px; }
+.in { max-width: 1240px; margin-inline: auto; display: grid; gap: 28px; }
+.band--off { background: var(--off); }
+.band--black { background: var(--black); color: var(--white); }
+.band--red { background: var(--red); color: var(--white); }
+
+h1 { margin: 0; font: 800 clamp(34px, 5vw, 70px)/1.05 var(--stack); letter-spacing: -.02em; text-transform: uppercase; }
+.lead { margin: 0; max-width: 62ch; color: var(--grey); }
+.band--black .lead { color: #bdbdbd; }
+
+/* Status: what this browser actually used */
+.status { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: #cfcfcf; border: 1px solid #cfcfcf; }
+.cell { background: var(--white); padding: 14px 16px; display: grid; gap: 6px; min-width: 0; }
+.cell b { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; color: var(--grey); }
+.cell span { font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
+.cell small { font-size: 13px; color: var(--grey); overflow-wrap: anywhere; }
+.yes { color: var(--ok); }
+.no { color: var(--warn); }
+
+.label { margin: 0; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; opacity: .75; font-variant-numeric: tabular-nums; }
+.spec { display: grid; gap: 6px; min-width: 0; }
+.spec p { margin: 0; font-family: var(--stack); font-weight: 800; text-transform: uppercase; letter-spacing: -.02em; line-height: 1.05; overflow-wrap: anywhere; }
+.de { hyphens: auto; }
+
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+.compare p { margin: 0; font-size: 46px; line-height: 1.05; text-transform: uppercase; letter-spacing: -.02em; }
+.w700 { font-weight: 700; } .w800 { font-weight: 800; } .w900 { font-weight: 900; }
+
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; font: 700 13px/1 var(--stack); text-transform: uppercase; border: 0; }
+.btn--w { background: var(--white); color: var(--black); }
+.btn--r { background: var(--red); color: var(--white); }
+.btn--k { background: var(--black); color: var(--white); }
+</style>
+
+<section class="band band--off">
+  <div class="in">
+    <h1>Heavy render check</h1>
+    <p class="lead">Helvetica Neue LT Pro 85 Heavy, as used in the Mammoet home headings. Take a screenshot of this whole page on each device. The panel below says which font this browser actually drew, so every screenshot explains itself.</p>
+    <div class="status" id="status">
+      <div class="cell"><b>Heavy (85)</b><span id="s-hv">Checking…</span><small id="s-hv-src"></small></div>
+      <div class="cell"><b>Bold (75) · Black (95)</b><span id="s-bd">Checking…</span></div>
+      <div class="cell"><b>Fallback that would show</b><span id="s-fb">Checking…</span><small>When the licensed font is missing</small></div>
+      <div class="cell"><b>Device</b><span id="s-os">…</span><small id="s-ua"></small></div>
+      <div class="cell"><b>Screen</b><span id="s-scr">…</span><small id="s-dpr"></small></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="in">
+    <div class="spec"><p class="label">70 px · hero</p><p style="font-size:70px">Heavy lifting and transport in Canada</p></div>
+    <div class="spec de" lang="de"><p class="label">70 px · hero · DE</p><p style="font-size:70px">Schwerlasthub und Schwertransport in Kanada</p></div>
+    <div class="spec"><p class="label">60 px · section</p><p style="font-size:60px">Happening near you</p></div>
+    <div class="spec"><p class="label">46 px · tile</p><p style="font-size:46px">2 × 320 T · 1,850 T · 38 days</p></div>
+    <div class="spec"><p class="label">34 px · hero on phone</p><p style="font-size:34px">Heavy lifting and transport in Canada</p></div>
+    <div class="spec"><p class="label">30 px · person</p><p style="font-size:30px">Alex Lindqvist</p></div>
+    <div class="spec"><p class="label">24 px</p><p style="font-size:24px">Mammoet in Canada · Kernkraft in Kanada</p></div>
+    <div class="spec"><p class="label">18 px</p><p style="font-size:18px">Mammoet in Canada · Kernkraft in Kanada · ÄÖÜ ß 0123456789</p></div>
+    <div class="spec"><p class="label">14 px</p><p style="font-size:14px">Mammoet in Canada · Kernkraft in Kanada · ÄÖÜ ß 0123456789</p></div>
+  </div>
+</section>
+
+<section class="band band--black">
+  <div class="in">
+    <div class="spec"><p class="label">On black · 60 px</p><p style="font-size:60px">Nuclear in Canada</p></div>
+    <div class="spec"><p class="label">On black · 24 px</p><p style="font-size:24px">Four steam generators replaced during a planned outage</p></div>
+  </div>
+</section>
+
+<section class="band band--red">
+  <div class="in">
+    <div class="spec"><p class="label">On red #FF0000 · 46 px</p><p style="font-size:46px">Need a crane?</p></div>
+    <div class="spec"><p class="label">On red · 30 px</p><p style="font-size:30px">Mammoet in Canada</p></div>
+    <div class="btns"><span class="btn btn--w">See the project</span><span class="btn btn--k">Get a quick quote</span></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="in">
+    <p class="label">Same size, three weights · 46 px</p>
+    <div class="compare">
+      <div class="spec"><p class="label">75 Bold · 700</p><p class="w700">Heavy lift</p></div>
+      <div class="spec"><p class="label">85 Heavy · 800</p><p class="w800">Heavy lift</p></div>
+      <div class="spec"><p class="label">95 Black · 900</p><p class="w900">Heavy lift</p></div>
+    </div>
+    <div class="btns"><span class="btn btn--r">Send request</span><span class="btn btn--k">All locations</span></div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var SAMPLE = 'HAMBURGEFONSTIV 0123456789 ÄÖÜ';
+  var cv = document.createElement('canvas').getContext('2d');
+  function w(font) { cv.font = font; return cv.measureText(SAMPLE).width; }
+  // A face is present when text in "Face, monospace" measures differently from plain monospace.
+  function has(weight, family) { return Math.abs(w(weight + ' 40px ' + family + ', monospace') - w(weight + ' 40px monospace')) > 0.5; }
+  function set(id, text, ok) { var el = document.getElementById(id); el.textContent = text; if (ok != null) el.className = ok ? 'yes' : 'no'; }
+
+  var ua = navigator.userAgent;
+  var os = /Windows NT 10/.test(ua) ? 'Windows 10/11' : /Windows/.test(ua) ? 'Windows' : /Android/.test(ua) ? 'Android' : /iPhone|iPad/.test(ua) ? 'iOS / iPadOS' : /Mac OS X/.test(ua) ? 'macOS' : /Linux/.test(ua) ? 'Linux' : 'Unknown';
+  var br = /Edg\//.test(ua) ? 'Edge' : /Firefox\//.test(ua) ? 'Firefox' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : 'Other';
+  set('s-os', os + ' · ' + br); set('s-ua', ua);
+  set('s-scr', innerWidth + ' × ' + innerHeight + ' px'); set('s-dpr', 'Pixel ratio ' + (window.devicePixelRatio || 1));
+
+  function check() {
+    var hv = has(800, '"MM LT Pro"'), bd = has(700, '"MM LT Pro"'), bk = has(900, '"MM LT Pro"');
+    set('s-hv', hv ? 'Helvetica Neue LT Pro Heavy: yes' : 'Not available: fallback is drawn', hv);
+    set('s-hv-src', hv ? 'Real Heavy outlines, not synthetic bold' : 'Headings here show the fallback below');
+    set('s-bd', (bd ? 'Bold yes' : 'Bold no') + ' · ' + (bk ? 'Black yes' : 'Black no'), bd && bk);
+    // Linux maps unknown names like "Helvetica Neue" to a look-alike; treat a match with Arial's width as not installed.
+    function real(fam) { return has(800, fam) && Math.abs(w('800 40px ' + fam + ', monospace') - w('800 40px Arial, monospace')) > 0.5; }
+    var fb = real('"Helvetica Neue"') ? 'Helvetica Neue or a system look-alike' : real('Helvetica') ? 'Helvetica' : has(800, 'Arial') ? 'Arial or a look-alike' : 'Default sans-serif';
+    set('s-fb', fb);
+  }
+  var loads = [400, 500, 700, 800, 900].map(function (wt) { return document.fonts ? document.fonts.load(wt + ' 40px "MM LT Pro"', SAMPLE).catch(function () {}) : null; });
+  Promise.all(loads).then(check, check);
+  setTimeout(check, 2500);
+})();
+</script>
